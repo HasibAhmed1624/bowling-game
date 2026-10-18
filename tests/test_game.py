@@ -1,8 +1,11 @@
+import pytest
+
 from bowling_game.game import Game
 
 
-def test_gutter_game_scores_zero():
+@pytest.mark.parametrize(("pins", "expected"), [(0, 0), (1, 20)])
+def test_roll_same_pins_twenty_times(pins, expected):
     game = Game()
     for _ in range(20):
-        game.roll(0)
-    assert game.score() == 0
+        game.roll(pins)
+    assert game.score() == expected
