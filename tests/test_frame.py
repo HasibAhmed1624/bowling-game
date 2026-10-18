@@ -38,6 +38,19 @@ def test_strike_is_not_a_spare():
     assert not frame.is_spare
 
 
+def test_strike_is_first_roll_of_ten():
+    frame = Frame()
+    assert not frame.is_strike
+    frame.add_roll(10)
+    assert frame.is_strike
+
+
+def test_non_ten_first_roll_is_not_a_strike():
+    frame = Frame()
+    frame.add_roll(9)
+    assert not frame.is_strike
+
+
 def test_pins_is_sum_of_rolls():
     frame = Frame()
     frame.add_roll(3)

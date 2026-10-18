@@ -32,7 +32,7 @@ Each row = one red-green-refactor cycle via `/tdd-step`.
 | 2 | [x] | all ones: 20 rolls of 1 | score 20 | — |
 | 3 | [x] | frame completes after 2 rolls (1 if strike) | frame counter advances | `Frame` (rolls, `is_complete()`, bonus length) |
 | 4 | [x] | spare, then next roll is 3 | spare frame scores 13 | `Frame` gains spare bonus lookup |
-| 5 | [ ] | strike, then next two rolls | strike frame scores 10 + next two | `Frame` gains strike bonus |
+| 5 | [x] | strike, then next two rolls | strike frame scores 10 + next two | `Frame` gains strike bonus |
 | 6 | [ ] | 10th-frame spare → one extra roll counts | total includes bonus roll | `Frames` (10-frame boundary rules) |
 | 7 | [ ] | 10th-frame strike → two extra rolls | total includes both | `Frames` handles overflow rolls |
 | 8 | [ ] | perfect game: 12 strikes | 300 | integration check across collaborators |

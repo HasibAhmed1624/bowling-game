@@ -14,10 +14,12 @@ class Frame:
 
     @property
     def is_complete(self) -> bool:
-        if not self._rolls:
-            return False
-        return self._rolls[0] == 10 or len(self._rolls) == 2
+        return self.is_strike or len(self._rolls) == 2
 
     @property
     def is_spare(self) -> bool:
         return len(self._rolls) == 2 and self.pins == 10
+
+    @property
+    def is_strike(self) -> bool:
+        return bool(self._rolls) and self._rolls[0] == 10

@@ -17,7 +17,10 @@ class Game:
         total = 0
         index = 0
         for frame in self._frames:
-            if frame.is_spare:
+            if frame.is_strike:
+                total += 10 + self._rolls[index + 1] + self._rolls[index + 2]
+                index += 1
+            elif frame.is_spare:
                 total += 10 + self._rolls[index + 2]
                 index += 2
             else:
