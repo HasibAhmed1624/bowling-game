@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 
 from bowling_game.game import Game
-from bowling_game.gui.logic import PLAYER_SERIES, cumulatives, expand_series, marks
+from bowling_game.gui.logic import PLAYER_SERIES, cumulatives, expand_series, marks, narrate
 
 ROLL_DELAY_MS = 700
 
@@ -98,25 +98,10 @@ class BowlingApp:
         self._refresh()
 
     def _explain(self, name: str, pins: int) -> None:
-        game = self.games[name]
-        frame_number = game.frame_number
-        rolls_per_frame = game.rolls_per_frame
-        frame = rolls_per_frame[frame_number - 1] if frame_number - 1 < len(rolls_per_frame) else ()
-
-        if pins == 10:
-            self._log(f"{name} — frame {frame_number}: STRIKE. Scores 10 + the next two rolls.")
-        else:
-            self._log(f"{name} — frame {frame_number}: rolled {pins}.")
-        if len(frame) == 2 and sum(frame) == 10:
-            self._log(f"    spare! this frame scores 10 + the next roll.")
-
-        previous = self.prev_scores[name]
-        for index, score in enumerate(game.frame_scores()):
-            was = previous[index] if index < len(previous) else None
-            if score is not None and was is None:
-                notation = " ".join(marks(rolls_per_frame[index]))
-                self._log(f"    frame {index + 1} final: {notation} → {score} pins")
-        self.prev_scores[name] = game.frame_scores()
+        lines, scores = narrate(name, pins, self.games[name], self.prev_scores[name])
+        for line in lines:
+            self._log(line)
+        self.prev_scores[name] = scores
 
     def _refresh(self) -> None:
         for name, game in self.games.items():

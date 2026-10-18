@@ -87,6 +87,41 @@ def cumulatives(frame_scores: Sequence[int | None]) -> list[int | None]:
     return out
 
 
+def narrate(
+    name: str,
+    pins: int,
+    game: Game,
+    previous_scores: Sequence[int | None],
+) -> tuple[list[str], list[int | None]]:
+    """Lines explaining a ball just rolled, plus the game's new frame scores.
+
+    Call after `game.roll(pins)`. Frame scores only appear once their bonus
+    rolls have landed, so a strike's line can be several balls late.
+    """
+    rolls_per_frame = game.rolls_per_frame
+    frame_index = max(i for i, rolls in enumerate(rolls_per_frame) if rolls)
+    frame = rolls_per_frame[frame_index]
+    frame_number = frame_index + 1
+
+    lines: list[str] = []
+    if len(frame) == 1 and frame[0] == 10:
+        lines.append(f"{name} — frame {frame_number}: STRIKE. Scores 10 + the next two rolls.")
+    elif pins == 10:
+        lines.append(f"{name} — frame {frame_number}: rolled 10 (bonus ball).")
+    else:
+        lines.append(f"{name} — frame {frame_number}: rolled {pins}.")
+    if len(frame) == 2 and sum(frame) == 10:
+        lines.append(f"{name} — frame {frame_number}: spare! Scores 10 + the next roll.")
+
+    scores = game.frame_scores()
+    for index, score in enumerate(scores):
+        was = previous_scores[index] if index < len(previous_scores) else None
+        if score is not None and was is None:
+            notation = " ".join(marks(rolls_per_frame[index]))
+            lines.append(f"    {name} frame {index + 1} final: {notation} → {score} pins")
+    return lines, scores
+
+
 def play(series: Sequence[int]) -> Game:
     game = Game()
     for pins in series:
