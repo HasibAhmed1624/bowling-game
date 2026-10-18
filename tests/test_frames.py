@@ -29,3 +29,12 @@ def test_score_includes_tenth_frame_bonus_roll():
     for pins in (5, 5, 3):
         frames.add_roll(pins)
     assert frames.score() == 13
+
+
+def test_score_includes_two_tenth_frame_bonus_rolls():
+    frames = Frames()
+    for _ in range(18):
+        frames.add_roll(0)
+    for pins in (10, 3, 4):
+        frames.add_roll(pins)
+    assert frames.score() == 17
