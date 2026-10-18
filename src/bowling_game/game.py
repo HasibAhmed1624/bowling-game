@@ -1,33 +1,16 @@
-from bowling_game.frame import Frame
+from bowling_game.frames import Frames
 
 
 class Game:
     def __init__(self) -> None:
-        self._rolls: list[int] = []
-        self._frames: list[Frame] = [Frame()]
+        self._frames = Frames()
 
     def roll(self, pins: int) -> None:
-        self._rolls.append(pins)
-        frame = self._frames[-1]
-        frame.add_roll(pins)
-        if frame.is_complete and len(self._frames) < 10:
-            self._frames.append(Frame())
+        self._frames.add_roll(pins)
 
     def score(self) -> int:
-        total = 0
-        index = 0
-        for frame in self._frames:
-            if frame.is_strike:
-                total += 10 + self._rolls[index + 1] + self._rolls[index + 2]
-                index += 1
-            elif frame.is_spare:
-                total += 10 + self._rolls[index + 2]
-                index += 2
-            else:
-                total += frame.pins
-                index += len(frame)
-        return total
+        return self._frames.score()
 
     @property
     def frame_number(self) -> int:
-        return len(self._frames)
+        return self._frames.number

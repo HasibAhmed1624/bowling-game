@@ -34,3 +34,13 @@ def test_strike_scores_next_two_rolls_as_bonus():
     for pins in (10, 3, 4):
         game.roll(pins)
     assert game.score() == 24
+
+
+def test_tenth_frame_spare_counts_bonus_roll():
+    game = Game()
+    for _ in range(18):
+        game.roll(0)
+    for pins in (5, 5, 3):
+        game.roll(pins)
+    assert game.score() == 13
+    assert game.frame_number == 10
