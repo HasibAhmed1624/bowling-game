@@ -9,12 +9,16 @@ class Frame:
         return len(self._rolls)
 
     @property
+    def rolls(self) -> tuple[int, ...]:
+        return tuple(self._rolls)
+
+    @property
     def pins(self) -> int:
         return sum(self._rolls)
 
     @property
     def is_complete(self) -> bool:
-        return self.is_strike or len(self._rolls) == 2
+        return self.is_strike or len(self._rolls) >= 2
 
     @property
     def is_spare(self) -> bool:

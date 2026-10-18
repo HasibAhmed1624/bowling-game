@@ -52,3 +52,46 @@ def test_all_spares_scores_one_fifty():
     for _ in range(21):
         frames.add_roll(5)
     assert frames.score() == 150
+
+
+def test_score_is_partial_safe_while_strike_awaits_bonus():
+    frames = Frames()
+    frames.add_roll(10)
+    assert frames.score() == 0
+    frames.add_roll(10)
+    assert frames.score() == 0
+    frames.add_roll(10)
+    assert frames.score() == 30
+
+
+def test_score_is_partial_safe_while_spare_awaits_bonus():
+    frames = Frames()
+    frames.add_roll(5)
+    frames.add_roll(5)
+    assert frames.score() == 0
+    frames.add_roll(3)
+    assert frames.score() == 13
+
+
+def test_rolls_per_frame_exposes_each_frames_rolls():
+    frames = Frames()
+    for pins in (10, 3, 4):
+        frames.add_roll(pins)
+    assert frames.rolls_per_frame == [(10,), (3, 4), ()]
+
+
+def test_frame_scores_show_pending_frames_as_none():
+    frames = Frames()
+    frames.add_roll(10)
+    assert frames.frame_scores() == [None, None]
+    frames.add_roll(10)
+    assert frames.frame_scores() == [None, None, None]
+    frames.add_roll(10)
+    assert frames.frame_scores() == [30, None, None, None]
+
+
+def test_frame_scores_breakdown_for_mixed_game():
+    frames = Frames()
+    for pins in (10, 3, 4, 5, 5, 2, 3):
+        frames.add_roll(pins)
+    assert frames.frame_scores() == [17, 7, 12, 5, None]

@@ -62,8 +62,15 @@ Do not create these on day one. They appear when a test demands them.
 4. Green. Refactor with all tests running.
 5. Repeat.
 
-## GUI (after the core is green)
+## GUI (after the core is green) — DONE
 
 Tkinter scorecard: frame grid, roll entry buttons, running total. `Game` stays
 UI-agnostic, so the GUI is a thin adapter — no TDD cycles required, but it's a
 good manual feedback loop and demo.
+
+Two scripted players (`src/bowling_game/gui/logic.py`: Ada 129, Grace 198) play
+one ball at a time so you can watch bonuses land. Run it:
+
+```
+python -m bowling_game.gui      # requires tkinter (apt install python3-tk)
+```

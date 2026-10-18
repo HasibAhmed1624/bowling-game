@@ -70,3 +70,20 @@ def test_all_spares_scores_one_fifty():
         game.roll(5)
     assert game.score() == 150
     assert game.frame_number == 10
+
+
+def test_score_is_partial_safe_mid_game():
+    game = Game()
+    game.roll(10)
+    assert game.score() == 0
+    game.roll(10)
+    assert game.score() == 0
+    game.roll(10)
+    assert game.score() == 30
+
+
+def test_rolls_per_frame_exposes_each_frames_rolls():
+    game = Game()
+    for pins in (10, 3, 4):
+        game.roll(pins)
+    assert game.rolls_per_frame == [(10,), (3, 4), ()]

@@ -14,3 +14,10 @@ class Game:
     @property
     def frame_number(self) -> int:
         return self._frames.number
+
+    @property
+    def rolls_per_frame(self) -> list[tuple[int, ...]]:
+        return self._frames.rolls_per_frame
+
+    def frame_scores(self) -> list[int | None]:
+        return self._frames.frame_scores()
