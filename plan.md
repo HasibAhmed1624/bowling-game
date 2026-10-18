@@ -28,7 +28,7 @@ Each row = one red-green-refactor cycle via `/tdd-step`.
 
 | # | Done | Test (Game level) | Expectation | Likely collaborator born here |
 |---|------|-------------------|-------------|-------------------------------|
-| 1 | [ ] | gutter game: 20 rolls of 0 | score 0 | none — Game keeps a raw roll log |
+| 1 | [x] | gutter game: 20 rolls of 0 | score 0 | none — Game keeps a raw roll log |
 | 2 | [ ] | all ones: 20 rolls of 1 | score 20 | — |
 | 3 | [ ] | frame completes after 2 rolls (1 if strike) | frame counter advances | `Frame` (rolls, `is_complete()`, bonus length) |
 | 4 | [ ] | spare, then next roll is 3 | spare frame scores 13 | `Frame` gains spare bonus lookup |
