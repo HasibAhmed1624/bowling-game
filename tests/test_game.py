@@ -9,3 +9,14 @@ def test_roll_same_pins_twenty_times(pins, expected):
     for _ in range(20):
         game.roll(pins)
     assert game.score() == expected
+
+
+def test_frame_number_advances_after_two_rolls_or_strike():
+    game = Game()
+    assert game.frame_number == 1
+    game.roll(3)
+    assert game.frame_number == 1
+    game.roll(4)
+    assert game.frame_number == 2
+    game.roll(10)
+    assert game.frame_number == 3
