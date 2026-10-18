@@ -54,3 +54,11 @@ def test_tenth_frame_strike_counts_two_bonus_rolls():
         game.roll(pins)
     assert game.score() == 17
     assert game.frame_number == 10
+
+
+def test_perfect_game_scores_three_hundred():
+    game = Game()
+    for _ in range(12):
+        game.roll(10)
+    assert game.score() == 300
+    assert game.frame_number == 10

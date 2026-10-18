@@ -38,3 +38,10 @@ def test_score_includes_two_tenth_frame_bonus_rolls():
     for pins in (10, 3, 4):
         frames.add_roll(pins)
     assert frames.score() == 17
+
+
+def test_perfect_game_scores_three_hundred():
+    frames = Frames()
+    for _ in range(12):
+        frames.add_roll(10)
+    assert frames.score() == 300
