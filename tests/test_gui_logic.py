@@ -56,6 +56,15 @@ def test_spare_is_announced_against_its_own_frame():
     assert "Ada — frame 2: spare! Scores 10 + the next roll." in lines
 
 
+def test_tenth_frame_bonus_strike_ball_is_labelled_as_bonus():
+    game = Game()
+    previous: list = []
+    for pins in (*([0] * 18), 10):
+        lines, previous = _narrated_ball(game, "Ada", pins, previous)
+    lines, _ = _narrated_ball(game, "Ada", 10, previous)
+    assert lines[0] == "Ada — frame 10: rolled 10 (bonus ball)."
+
+
 def test_frame_final_line_waits_for_its_bonus_rolls():
     game = Game()
     previous: list = []
