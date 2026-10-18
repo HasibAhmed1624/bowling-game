@@ -62,3 +62,11 @@ def test_perfect_game_scores_three_hundred():
         game.roll(10)
     assert game.score() == 300
     assert game.frame_number == 10
+
+
+def test_all_spares_scores_one_fifty():
+    game = Game()
+    for _ in range(21):
+        game.roll(5)
+    assert game.score() == 150
+    assert game.frame_number == 10

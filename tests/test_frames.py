@@ -45,3 +45,10 @@ def test_perfect_game_scores_three_hundred():
     for _ in range(12):
         frames.add_roll(10)
     assert frames.score() == 300
+
+
+def test_all_spares_scores_one_fifty():
+    frames = Frames()
+    for _ in range(21):
+        frames.add_roll(5)
+    assert frames.score() == 150

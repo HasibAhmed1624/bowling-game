@@ -36,7 +36,7 @@ Each row = one red-green-refactor cycle via `/tdd-step`.
 | 6 | [x] | 10th-frame spare → one extra roll counts | total includes bonus roll | `Frames` (10-frame boundary rules) |
 | 7 | [x] | 10th-frame strike → two extra rolls | total includes both | `Frames` handles overflow rolls |
 | 8 | [x] | perfect game: 12 strikes | 300 | integration check across collaborators |
-| 9 | [ ] | all spares: 21 rolls of 5 | 150 | optional safety net |
+| 9 | [x] | all spares: 21 rolls of 5 | 150 | optional safety net |
 
 The "collaborator born here" column is a forecast, not a spec — let the
 failures tell you. A cycle may just deepen an existing collaborator instead.
