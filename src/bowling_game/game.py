@@ -14,7 +14,16 @@ class Game:
             self._frames.append(Frame())
 
     def score(self) -> int:
-        return sum(self._rolls)
+        total = 0
+        index = 0
+        for frame in self._frames:
+            if frame.is_spare:
+                total += 10 + self._rolls[index + 2]
+                index += 2
+            else:
+                total += frame.pins
+                index += len(frame)
+        return total
 
     @property
     def frame_number(self) -> int:

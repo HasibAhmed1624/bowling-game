@@ -22,3 +22,24 @@ def test_strike_completes_frame_in_one_roll():
     frame = Frame()
     frame.add_roll(10)
     assert frame.is_complete
+
+
+def test_spare_requires_two_rolls_totalling_ten():
+    frame = Frame()
+    frame.add_roll(5)
+    assert not frame.is_spare
+    frame.add_roll(5)
+    assert frame.is_spare
+
+
+def test_strike_is_not_a_spare():
+    frame = Frame()
+    frame.add_roll(10)
+    assert not frame.is_spare
+
+
+def test_pins_is_sum_of_rolls():
+    frame = Frame()
+    frame.add_roll(3)
+    frame.add_roll(4)
+    assert frame.pins == 7

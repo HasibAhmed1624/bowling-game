@@ -20,3 +20,10 @@ def test_frame_number_advances_after_two_rolls_or_strike():
     assert game.frame_number == 2
     game.roll(10)
     assert game.frame_number == 3
+
+
+def test_spare_scores_next_roll_as_bonus():
+    game = Game()
+    for pins in (5, 5, 3, 4):
+        game.roll(pins)
+    assert game.score() == 20
